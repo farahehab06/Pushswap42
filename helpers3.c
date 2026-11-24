@@ -1,0 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helpers3.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amalsaka <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/14 15:58:45 by amalsaka          #+#    #+#             */
+/*   Updated: 2026/11/14 15:59:53 by amalsaka         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push.h"
+
+double	calc(t_stack *a)
+{
+	t_stack	*i;
+	t_stack	*j;
+	int		mistakes;
+	int		total_pairs;
+
+	mistakes = 0;
+	total_pairs = 0;
+	i = a;
+	while (i)
+	{
+		j = i->next;
+		while (j)
+		{
+			total_pairs++;
+			if (i->number > j->number)
+				mistakes++;
+			j = j ->next;
+		}
+		i = i->next;
+	}
+	if (total_pairs == 0)
+		return (0.0);
+	return ((double)mistakes / total_pairs);
+}

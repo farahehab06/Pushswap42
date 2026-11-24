@@ -1,0 +1,54 @@
+void	swap(t_stack **a)
+{
+	t_stack	*second;
+
+	if (!*a || !(*a)->next)
+		return ;
+	second = (*a) ->next; // I save the 2nd node
+	(*a) ->next = second ->next; // i make 1st node point to the 3rd node
+	second ->next = *a; // i make the new 2nd the HEAD of the stack
+	*a = second; // update the head
+}
+
+void	rotate(t_stack **a)
+{
+	t_stack *first;
+
+	if (!*a || !(*a)->next)
+		return ;
+	first = *a; // i save the 1st node
+	*a = first ->next; // update the head to point to 2nd node which will be new head
+	first ->next = NULL; // the first node will now point to null bc we will put it last
+	(stack_last(*a))->next = first; // i go to the last node and make it point to the new last node 
+}
+
+void	push(t_stack **dst, t_stack **src)
+{
+	t_stack	*temp;
+
+	if (!*src)
+		return ;
+	temp = *src; // save the head of my src stack
+	*src = temp->next; // make the head point to the 2nd node of my src stack
+	temp->next = *dst; // the node to be moved now points to the old head of dst
+	*dst = temp; // moved node becomes the new head
+}
+
+void	reverse_rotate(t_stack **a)
+{
+	t_stack	*prev;
+	t_stack	*last;
+
+	if (!*a || !(*a)->next)
+		return ;
+	prev = NULL; // to track the node b4 last
+	last = *a; 
+	while (last->next)
+	{
+		prev = last; 
+		last = last->next;
+	}
+	prev->next = NULL; // the node b4 the last becomes last one
+	last->next = *a; // the last node is at the top
+	*a = last; // update the head
+}
